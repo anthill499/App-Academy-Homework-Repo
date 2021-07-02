@@ -46,16 +46,20 @@ class Map
     end
 
     def set(key, value)     
-        keys = @arr.flatten.select { |ele| @arr.index(ele) % 2 == 0 }
-        keys.include?(key) ? @arr.each { |subarr| subarr[1] = value if subarr[0] == key } : @arr << [key, value]
+        keys = @arr.map { |subarr| subarr[0] }
+        if !keys.include?(key)
+            @arr << [key, value]
+        else
+            @arr.each { |subarr2| subarr2[-1] = value if subarr.include?(key) }
+        end
     end
 
     def get(key)
-        @arr.each { |pair| pair.include?(key) ? pair : raise "error!" }
+        @arr.each { |pair| return pair if pair.include?(key) }
     end
 
     def delete(key)
-        @arr.each { |pair| (pair.include?(key) ? @arr.remove(pair) : raise "error!") }
+        @arr.each { |pair| @arr.delete(pair) if pair.include?(key) }
         @arr
     end 
     
@@ -68,6 +72,9 @@ end
 m = Map.new
 m.set("gf", "mad")
 m.set("bf", "hungry")
-m.set("me?", 21)
+m.set("me?", 22)
+m.set("haha", "gottem")
 
 p m.show
+p m.get("bf")
+p m.delete("gf")

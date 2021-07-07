@@ -13,7 +13,7 @@ class Simon
     until @game_over == true
       take_turn
     end
-    game_over_message
+    p game_over_message
     reset_game
   end
 
@@ -22,7 +22,7 @@ class Simon
     require_sequence
 
     if @game_over == false
-      round_success_message
+      p round_success_message
       @sequence_length += 1
     end
   end
@@ -32,7 +32,6 @@ class Simon
   end
 
   def require_sequence
-  
   end
 
   def add_random_color
@@ -40,11 +39,11 @@ class Simon
   end
 
   def round_success_message
-
+    p "SUCCESS"
   end
 
   def game_over_message
-
+    "YOU LOST"
   end
 
   def reset_game

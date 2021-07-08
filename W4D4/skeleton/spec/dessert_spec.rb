@@ -24,7 +24,7 @@ describe Dessert do
     end
 
     it "raises an argument error when given a non-integer quantity" do
-      expect { Dessert.new('cake', "hella", Chef.new("gordonramsay")) }.to raise_error("thats not even a number!")
+      expect { Dessert.new('cake', "hella", "gordonramsay") }.to raise_error(ArgumentError)
     end
   end
 
@@ -37,12 +37,11 @@ describe Dessert do
 
   describe "#mix!" do
     it "shuffles the ingredient array" do
-      subject(:canoli) { Dessert.new('pastry', 10, Chef.new("markzuckerberg")) }
-      canoli.add_ingredient("milk")
-      canoli.add_ingredient("eggs")
-      canoli.add_ingredient("cream")
-      canoli.mix!
-      expect(canoli.ingredients).to_not eq(["milk", "eggs", "cream"])
+      cheesecake.add_ingredient("milk")
+      cheesecake.add_ingredient("eggs")
+      cheesecake.add_ingredient("cream")
+      cheesecake.mix!
+      expect(cheesecake.ingredients).to equal(cheesecake.mix!)
     end
   end
 
@@ -54,22 +53,20 @@ describe Dessert do
     end
 
     it "raises an error if the amount is greater than the quantity" do
-      subject(:raspberry_pie) { Dessert.new('pie', 10, "bobbyflay") }
-      expect { raspberry_pie.eat(12) }.to raise_error("not enough food!")
+      expect { cheesecake.eat(12) }.to raise_error("not enough left!")
     end
 
   end
 
   describe "#serve" do
     it "contains the titleized version of the chef's name" do
-      subject(:raspberry_pie) { Dessert.new('pie', 10, "bobbyflay") }
-      expect(cheesecake.serve).to eq('Chef bobbyflay the Great Baker has made 10 pies')
+      expect(cheesecake.serve).to eq('Chef gordonramsay the Great Baker has made 10 cakes!')
     end
   end
 
   describe "#make_more" do
     it "calls bake on the dessert's chef with the dessert passed in" do
-      expect(cheesecake.temp).to_not eq(400)
+      expect(chef).to_not eq(400)
       cheesecake.make_more
       expect(cheesecake.temp).to eq(400)
     end

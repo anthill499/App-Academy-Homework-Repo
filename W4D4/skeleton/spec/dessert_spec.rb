@@ -54,7 +54,7 @@ describe Dessert do
     end
 
     it "raises an error if the amount is greater than the quantity" do
-      subject(:raspberry_pie) { Dessert.new('pie', 10, Chef.new("bobbyflay")) }
+      subject(:raspberry_pie) { Dessert.new('pie', 10, "bobbyflay") }
       expect { raspberry_pie.eat(12) }.to raise_error("not enough food!")
     end
 
@@ -62,7 +62,8 @@ describe Dessert do
 
   describe "#serve" do
     it "contains the titleized version of the chef's name" do
-      expect(chef.titleize).to eq('Chef gordonramsay the Great Baker')
+      subject(:raspberry_pie) { Dessert.new('pie', 10, "bobbyflay") }
+      expect(cheesecake.serve).to eq('Chef bobbyflay the Great Baker has made 10 pies')
     end
   end
 

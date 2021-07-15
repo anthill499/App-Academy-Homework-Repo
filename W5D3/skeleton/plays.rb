@@ -26,7 +26,7 @@ class Play
 
   def self.find_by_playwright(name)
     playwright = Playwright.find_by_name(name)
-    raise "#{name} not found in DB" unless playwright
+    raise "#{name} not found in DB" if playwright == nil
 
     plays = PlayDBConnection.instance.execute(<<-SQL, playwright.id)
       SELECT
@@ -56,6 +56,7 @@ class Play
 
   def create                      # user calls create on the instance, heredoc: everything between SQL will be read as a string<<-SQL
     raise "#{self} already in database" if self.id    # 
+    
     PlayDBConnection.instance.execute(<<-SQL, self.title, self.year, self.playwright_id)
       INSERT INTO                     
         plays (title, year, playwright_id)

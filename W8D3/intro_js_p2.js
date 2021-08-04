@@ -49,13 +49,13 @@ class Elephant {
     
 }
 
-let anthony = new Elephant(50, "Anthony", ["eating a burger", "doing a backflip"]);
+// let anthony = new Elephant(50, "Anthony", ["eating a burger", "doing a backflip"]);
 
-let ellie = new Elephant("Ellie", 185, ["giving human friends a ride", "playing hide and seek"]);
-let charlie = new Elephant("Charlie", 200, ["painting pictures", "spraying water for a slip and slide"]);
-let kate = new Elephant("Kate", 234, ["writing letters", "stealing peanuts"]);
-let micah = new Elephant("Micah", 143, ["trotting", "playing tic tac toe", "doing elephant ballet"]);
-Elephant.herd = [ellie, charlie, kate, micah, anthony];
+// let ellie = new Elephant("Ellie", 185, ["giving human friends a ride", "playing hide and seek"]);
+// let charlie = new Elephant("Charlie", 200, ["painting pictures", "spraying water for a slip and slide"]);
+// let kate = new Elephant("Kate", 234, ["writing letters", "stealing peanuts"]);
+// let micah = new Elephant("Micah", 143, ["trotting", "playing tic tac toe", "doing elephant ballet"]);
+// Elephant.herd = [ellie, charlie, kate, micah, anthony];
 
 const stampede = function() {
     // return Elephant.herd
@@ -64,9 +64,16 @@ const stampede = function() {
 
 // console.log(stampede());
 
-// Phase IV: Closures
+// Phase IV: Closures -> outer block captures everything inside the the block and context
 
 function dinerBreakfast() {
-    
-}
+    let order = "I'd like hash browns and bacon"
+    return function(food) {
+        order = order.concat(` and ${food}`)
+        return order.concat(',with a side of tea') // in JS, concat does not mutate a string
+    }
+} 
 
+let bFastOrder = dinerBreakfast();
+console.log(bFastOrder("orange juice"));
+console.log(bFastOrder("french toast"));

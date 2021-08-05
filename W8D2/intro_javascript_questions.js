@@ -22,7 +22,6 @@
 
 // // mysteryScoping2();
 
-
 // function mysteryScoping3() {
 //     const x = 'out of block';
 //     if (true) {
@@ -116,8 +115,28 @@ function sumOfNPrimes(n) {
     // return count
 }
 
-console.log(sumOfNPrimes(0));
-console.log(sumOfNPrimes(1));
-console.log(sumOfNPrimes(4));
+// console.log(sumOfNPrimes(0));
+// console.log(sumOfNPrimes(1));
+// console.log(sumOfNPrimes(4));
 
 
+function find_answer(name, ag, rg) {
+    const x = "abcdefghijklmnopqrstuvwxyz".split("")
+    ind = x.indexOf(name[0])
+
+    let ant_guess = Math.abs(ind - x.indexOf(ag[0])) 
+    let rich_guess = Math.abs(ind - x.indexOf(rg[0]))
+
+    if ((ant_guess) > (rich_guess)) {
+        return "Richard Wins"
+    } else {
+        return "Anthony Wins"
+    }
+}
+
+
+// console.log(find_answer("quinn", "anthony", "hansaem"));
+// console.log(find_answer("mike", "quinn", "mike"));
+// console.log(find_answer("james", "quinn", "hansaem"));
+
+console.log(find_answer("cindy", "daniel", "omar"))

@@ -12,7 +12,6 @@
 // console.log(scheduleGreatMovieReminder("The Third Man"));
 
 
-
 //     setTimeout(function() {
 //         window.alert(`HAMMERTIME`);
 //     }, 5000);
@@ -23,6 +22,27 @@
 // }
 // console.log(hammerTime(5000));
 
+function teaAndBiscuits() {
+
+    reader.question('Would you like some tea?', (res) => {
+        let first = res;
+        console.log(`You replied ${res}.`);
+    });
+
+    reader.question('Would you like some biscuits?', (res) => {
+        let second = res;
+        console.log(`You replied ${res}.`);
+    });
+    
+    const firstRes = (first === 'yes') ? 'do' : 'don\'t';
+    const secondRes = (second === 'yes') ? 'do' : 'don\'t';
+    console.log(`So you ${firstRes} want tea and you ${secondRes} want biscuits.`);
+    reader.close();
+}
 
 
+
+
+
+// console.log(iterate([1, 2, 3, 4, 2]));
 

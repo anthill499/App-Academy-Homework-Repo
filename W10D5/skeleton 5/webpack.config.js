@@ -2,7 +2,7 @@ const path = require('path');           // current path: module that allows u to
 
 module.exports = {                      // exports
     context: __dirname,                 // context: ???
-    entry: "./index.jsx",               // jsx file => react file
+    entry: "./app.jsx",               // jsx file => react file
     output: {                           // target for webpack, webpack => transforms js into another js.
         path: path.resolve(__dirname),  // webpack => any js => vanilla js
         filename: "bundle.js"           
@@ -14,7 +14,7 @@ module.exports = {                      // exports
                 exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
-                    query: {
+                    options: {
                         presets: ['@babel/env', '@babel/react']
                     }
                 },

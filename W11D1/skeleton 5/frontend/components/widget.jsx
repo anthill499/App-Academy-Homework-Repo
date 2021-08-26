@@ -1,16 +1,15 @@
-import React from 'react';
-import Job from './job';
-import selectLocation from './../actions';
+import React from "react";
+import Job from "./job";
+import selectLocation from "./../actions";
 
 class Widget extends React.Component {
-
   constructor(props) {
     super(props);
     this.forceUpdate = this.forceUpdate.bind(this);
 
     // require this component to re-render whenever the store's state changes
     this.props.store.subscribe(this.forceUpdate);
-    this.cities = ["New York","San Francisco", "Los Angeles"];
+    this.cities = ["New York", "San Francisco", "Los Angeles"];
     this.selectLocation = selectLocation.bind(this);
   }
 
@@ -18,40 +17,41 @@ class Widget extends React.Component {
     $.ajax({
       url: `https://79vzv34gc4.execute-api.us-west-1.amazonaws.com/default/jobListings?location=${city}`,
       type: "GET",
-      success: function(resp) {
+      success: function (resp) {
         // tell the store to update with the new location and jobs;
         // use the action creator 'selectLocation' to build the object to
         // be dispatched
-        this.props.store.dispatch(this.selectLocation(city, resp))
-
-      }.bind(this)
+        this.props.store.dispatch(this.selectLocation(city, resp));
+      }.bind(this),
     });
   }
 
   render() {
-
     // get the store's current state and deconstruct it into 'jobs'
     // and 'city' variables
     const { city, jobs } = this.props.store.getState();
-    const cityOptions = this.cities.map(city => (
-        <button onClick={ () => { this.fetchJobListings(city) }}
-             key={city}
-             className="job-option">
-          {city}
-        </button>
-      )
-    );
+    const cityOptions = this.cities.map((city) => (
+      <button
+        onClick={() => {
+          this.fetchJobListings(city);
+        }}
+        key={city}
+        className="job-option">
+        {city}
+      </button>
+    ));
 
-    const jobListings = jobs.map(job => (
-      <Job key={job.id}
-            title={job.title}
-            company={job.company}
-            location={job.location}
-            type={job.type}
-            description={job.description}
-            info = {job.url}/>
-    )
-    );
+    const jobListings = jobs.map((job) => (
+      <Job
+        key={job.id}
+        title={job.title}
+        company={job.company}
+        location={job.location}
+        type={job.type}
+        description={job.description}
+        info={job.url}
+      />
+    ));
 
     return (
       <div>
@@ -62,15 +62,12 @@ class Widget extends React.Component {
           Location:
           {cityOptions}
         </div>
-        
+
         <h3>{jobListings.length} Job Listings</h3>
-        <ol className="listings-list">
-            {jobListings}
-        </ol>
+        <ol className="listings-list">{jobListings}</ol>
       </div>
     );
   }
-};
-
+}
 
 export default Widget;
